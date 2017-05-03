@@ -1,0 +1,238 @@
+var x = 1 + 1
+x = 3 // This compiles because "x" is declared with the "var" keyword.
+println(x * x) // 9
+
+//
+
+var x: Int = 1 + 1
+
+//    
+
+val addOne = (x: Int) => x + 1
+println(addOne(1)) // 2
+
+//
+
+val add = (x: Int, y : Int) => x + y
+println(add(1,2))
+
+//
+
+val getTheAnswer = () => 42
+println(getTheAnswer())
+
+//
+
+def add (x:Int, y: Int) : Int = x + y
+println(add(1,2))
+
+//
+
+def getSquareString(input : Double) : String = {
+  val square = input * input
+  square.toString
+}
+
+/////
+
+class Greeter(prefix: Double, suffix:String){
+  def greet (name: String) : Unit =
+  println(prefix + " " + name + " " + suffix)
+}
+val g = new Greeter(1 , "toto")
+g.greet("Oussema")
+
+///
+
+case class Point(x:Int,y:Int)
+val x = new Point(1,2)
+println(x)
+
+
+////
+
+
+object IdFactory {
+  
+  private var counter = 0
+  
+  def create () :  Int = {
+    counter = counter + 1
+    counter
+  }
+}
+
+val newId : Int = IdFactory.create()
+println(newId)
+val newerId : Int = IdFactory.create()
+println(newerId)
+
+
+
+trait Greeter{
+  def greet(name:String):Unit = {
+    println("Hello, "+ name + "!")
+  }
+}
+
+trait Greeter{
+  def greet(name:String):Unit = {
+    println("Hello, "+ name + "!")
+  }
+}
+
+class DefaultGreeter extends Greeter
+
+class CustomizableGreeter(prefix:String, postfix:String) extends Greeter {
+  
+  override def greet (name:String) : Unit = {
+    println(prefix + name + postfix) 
+  }
+}
+
+
+val greeter = new DefaultGreeter()
+greeter.greet("Scala Developer")
+
+val customGreeter =  new CustomizableGreeter("How are you, ", "?")
+
+customGreeter.greet("Scala Developer")
+
+
+///
+
+
+
+
+object Main {
+  
+  def main (args :  Array[String]) : Unit = {
+    println("Hello, scal developer")
+  }
+  
+}
+
+///
+
+
+val list : List[String] = List("a", "b" , "c")
+println(list)
+
+list.foreach(element => println(element))
+
+
+val list : List[String] = List("a", "b" , "c")
+println(list)
+
+list.foreach(element => println(element))
+
+///////////
+
+class Point (var x : Int, var y : Int) {
+  def move (dx: Int, dy:Int): Unit = {
+    x = x + dx
+    y = y + dy
+  }
+  override def toString : String =
+  s"($x,$y)"
+}
+
+val point1 = new Point(2,3)
+point1.x
+println(point1)
+
+///
+
+
+trait Similarity {
+ def isSimilar(x:Any):Boolean
+ def isNotSimilar(x:Any):Boolean = ! isSimilar(x)
+}
+
+class Point (xc:Int, yc:Int) extends Similarity {
+  var x : Int = xc
+  var y : Int = yc
+  
+  def isSimilar (obj: Any) =
+    obj.isInstanceOf[Point] && 
+    obj.asInstanceOf[Point].x == x
+}
+
+object TraitsTest extends App {
+  val p1 = new Point(2,3)
+  val p2 = new Point(2,4)
+  println(p1.isSimilar(p2))
+} 
+
+
+/////////////////////////
+
+abstract class Animal {
+  def name : String
+}
+
+abstract class Pet extends Animal {}
+
+class Cat extends Pet {
+  override def name = "Cat"
+}
+
+class Dog extends Pet {
+  override def name = "Dog"
+}
+
+class Lion extends Pet {
+  override def name = "Lion"
+}
+
+//class Cage[P <: Pet](p: P) {
+class Cage[P <: Pet](p: P)  {
+  def pet: P = p
+}
+
+object Main extends App {
+  var dogCage = new Cage[Dog] (new Dog)
+  var catCage = new Cage[Cat] (new Cat)
+}
+
+//////////////
+
+
+abstract class AbsIterator {
+  type T
+  def hasNext : Boolean
+  def next : T
+}  
+
+trait RichIterator extends AbsIterator {
+  def foreach(f:T => Unit) { while (hasNext) f(next) }
+}
+
+
+////
+
+
+
+(x: Int) => x+1
+
+new Function1[Int,Int] {
+  def apply(x:Int) : Int = x + 1
+}
+
+(x: Int, y:Int) =>  "(" + x + ", " + y + ")"
+
+() => { System.getProperty("user.dir") }
+
+
+object AnonymousFunction {
+  
+  val plusOne = (x:Int) => x + 1
+  
+  def main(args:Array[String]){
+    println(plusOne(0))
+  }
+}
+
+
+
+
